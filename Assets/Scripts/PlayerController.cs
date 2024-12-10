@@ -1,31 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.AI;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     public Animator animator;
-    public float moveSpeed = 2f;
+    private NavMeshAgent agent;
+    private Transform playerTransform;
 
-    private Vector3 moveDirection;
+    void Start()
+    {
+        // Vind de NavMeshAgent component
+        agent = GetComponent<NavMeshAgent>();
+
+        // Zoek de XR Rig met de tag "Player"
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            playerTransform = player.transform;
+        }
+    }
 
     void Update()
     {
-        // Input for 3D movement
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
-
-        // Define movement direction
-        moveDirection = new Vector3(horizontal, 0, vertical).normalized;
-
-        // Move the player
-        if (moveDirection.magnitude > 0.1f)
+        // Beweeg naar de positie van de speler als deze is gevonden
+        if (playerTransform != null)
         {
-            transform.Translate(moveDirection * moveSpeed * Time.deltaTime, Space.Self);
+            agent.SetDestination(playerTransform.position);
         }
-
-        // Update the Animator's Speed parameter
-        animator.SetFloat("Speed", moveDirection.magnitude * moveSpeed);
     }
 }
 

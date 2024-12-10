@@ -40,8 +40,6 @@ public class MobilUI : MonoBehaviour
             if (moveDown) movement += Vector3.back;
             if (moveLeft) movement += Vector3.left;
             if (moveRight) movement += Vector3.right;
-
-            playerMovement.transform.Translate(movement * playerMovement.moveSpeed * Time.deltaTime);
         }
     }
 
