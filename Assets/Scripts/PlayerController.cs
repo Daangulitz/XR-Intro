@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
 
         // Zoek de XR Rig met de tag "Player"
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        GameObject player = GameObject.FindGameObjectWithTag("Base");
         if (player != null)
         {
             playerTransform = player.transform;
