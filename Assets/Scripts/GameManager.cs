@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    private bool gameActive = true;
+    public bool gameActive;
     private int score = 0;
     private float scoreTimer = 0f; // Timer om score te verhogen
 	
@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+	    gameActive = false;
 	    scoreText.text = "Score: " + score;
 	    gameOverUI.SetActive(false);
     }
@@ -36,6 +37,7 @@ public class GameManager : MonoBehaviour
 		    scoreText.text = "Score: " + score;
 	    }
     }
+    
     
     public void GameOver()
     {

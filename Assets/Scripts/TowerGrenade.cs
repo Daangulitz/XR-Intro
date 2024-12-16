@@ -3,25 +3,24 @@ using UnityEngine;
 public class TowerGrenade : MonoBehaviour
 {
     public GameObject towerPrefab;
-    
     public GameObject towerGrenadePrefab;
-    public Transform[] spawnPoints;          // Array of spawn points
+    public Transform[] spawnPoints;  
+    
     void OnCollisionEnter(Collision collision)
     {
-        // Controleer of de grenade het terrein raakt
+        // Check if the grenade hits the terrain
         if (collision.gameObject.CompareTag("Terrain"))
         {
             Instantiate(towerPrefab, transform.position, Quaternion.identity);
-            SpawnNewTowerGrenade();
-            Destroy(gameObject);
+            Invoke(nameof(SpawnNewTowerGrenade), 0.1f); // Delay the spawn by 0.1 seconds
+            Destroy(gameObject,0.1f);
         }
     }
     
     void SpawnNewTowerGrenade()
     {
-        if (spawnPoints.Length == 0) return; // Safety check
+        if (spawnPoints.Length == 0) return;
 
-        // Kies een willekeurige spawnpunt
         int randomIndex = Random.Range(0, spawnPoints.Length);
 
         // Instantiate the bomb prefab at the chosen spawn point
