@@ -1,9 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
-using Vector3 = System.Numerics.Vector3; // Include XR Interaction Toolkit namespace
 
 public class StartGame : MonoBehaviour
 {
@@ -11,7 +7,6 @@ public class StartGame : MonoBehaviour
 
     private XRGrabInteractable grabInteractable; // Reference to the XR Grab component
     
-    public Vector3 startPosition;
 
     private void Awake()
     {
@@ -35,10 +30,8 @@ public class StartGame : MonoBehaviour
     {
         if (grabInteractable != null)
         {
-            grabInteractable.selectEntered.RemoveListener(OnWeaponPickedUp); // Stop listening
+            grabInteractable.selectEntered.RemoveListener(OnWeaponPickedUp);
         }
-
-        startPosition = transform.position;
     }
 
     private void OnWeaponPickedUp(SelectEnterEventArgs args)
@@ -51,7 +44,9 @@ public class StartGame : MonoBehaviour
         }
         else
         {
+            gameManager.gameActive = false;
             Debug.LogError("GameManager reference is missing!");
         }
     }
+    
 }

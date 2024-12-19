@@ -8,6 +8,8 @@ TagManager:
   - Base
   - Terrain
   - Spawner
+  - TowerSpawn
+  - SpawnPoint
   layers:
   - Default
   - TransparentFX

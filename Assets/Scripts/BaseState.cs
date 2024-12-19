@@ -3,31 +3,37 @@ using UnityEngine;
 public class BaseState : MonoBehaviour
 {
     [SerializeField] private GameManager gameManager;
-    [SerializeField] private Health health;
+    [SerializeField] private BaseHealth baseHealth;
 
     private void Update() {
-        if (health == null)
+        if (gameManager.gameActive)
         {
-            health.GetComponent<Health>();
-        } 
-        if (health != null)
-        {
-            if(gameManager != null)
+            if (baseHealth == null)
             {
-                if(health.currentHealth <= 0)
-                {
-                    Debug.Log("Game Over");
-                    gameManager.GameOver();
-                    Destroy(gameObject);
-                }
-            } else
-            {
-                Debug.LogError("Base has no reference to GameManager");
+                baseHealth.GetComponent<BaseHealth>();
             }
-            
-        } else 
-        {
-            Debug.LogError("Base has no reference to Health");
+
+            if (baseHealth != null)
+            {
+                if (gameManager != null)
+                {
+                    if (baseHealth.currentHealth <= 0)
+                    {
+                        Debug.Log("Game Over");
+                        gameManager.GameOver();
+                        Destroy(gameObject);
+                    }
+                }
+                else
+                {
+                    Debug.LogError("Base has no reference to GameManager");
+                }
+
+            }
+            else
+            {
+                Debug.LogError("Base has no reference to Health");
+            }
         }
     }
 }

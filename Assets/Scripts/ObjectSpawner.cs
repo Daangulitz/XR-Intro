@@ -6,13 +6,17 @@ public class ObjectSpawner : MonoBehaviour
     public float spawnInterval = 5f;     
     private float lastSpawnTime;         
     private int lastSpawnedIndex = -1;  
+    public GameManager gameManager;
 
     void Update()
     {
-        if (Time.time >= lastSpawnTime + spawnInterval)
+        if (gameManager.gameActive)
         {
-            SpawnObject();
-            lastSpawnTime = Time.time;
+            if (Time.time >= lastSpawnTime + spawnInterval)
+            {
+                SpawnObject();
+                lastSpawnTime = Time.time;
+            }
         }
     }
 

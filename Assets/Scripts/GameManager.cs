@@ -8,17 +8,23 @@ public class GameManager : MonoBehaviour
     public bool gameActive;
     private int score = 0;
     private float scoreTimer = 0f; // Timer om score te verhogen
+    public float currentCoins;
+    public float Coins;
 	
     // UI om de score te laten zien
     [SerializeField] private TextMeshProUGUI scoreText;
 	
+    [SerializeField] private TextMeshProUGUI coinText;
     // UI die getoond wordt bij game over
     [SerializeField] private GameObject gameOverUI;
+    
+    public BaseHealth baseHealth;
 
     private void Start()
     {
 	    gameActive = false;
 	    scoreText.text = "Score: " + score;
+	    coinText.text = "Coins: " + currentCoins;
 	    gameOverUI.SetActive(false);
     }
 
@@ -26,18 +32,23 @@ public class GameManager : MonoBehaviour
     {
 	    if (gameActive)
 	    {
-		    //Time.deltaTime geeft aantal seconden sinds laatste Update
+		    // Time.deltaTime geeft aantal seconden sinds laatste Update
 		    scoreTimer += Time.deltaTime;
 
 		    if (scoreTimer >= 1f) // Verhoog de score elke seconde
 		    {
+			    currentCoins++;
 			    score++;
 			    scoreTimer = 0f; // Reset de timer
 		    }
 		    scoreText.text = "Score: " + score;
+		    coinText.text = "Coins: " + currentCoins;
+	    }
+	    else
+	    {
+		    gameActive = false;
 	    }
     }
-    
     
     public void GameOver()
     {
@@ -45,7 +56,7 @@ public class GameManager : MonoBehaviour
 
 	    // Vind alle vijanden in de scene
 	    GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-	    //Loop door alle gevonden vijanden en vernietig ze
+	    // Loop door alle gevonden vijanden en vernietig ze
 	    foreach (GameObject enemy in enemies)
 	    {
 		    Destroy(enemy);
@@ -57,6 +68,13 @@ public class GameManager : MonoBehaviour
 	    {
 		    Destroy(spawner);
 	    }
+	    
+	    GameObject[] SpawnPoints = GameObject.FindGameObjectsWithTag("SpawnPoint");
+	    foreach (GameObject spawnPoint in SpawnPoints)
+	    {
+		    Destroy(spawnPoint);
+	    }
+
 
 	    // Toon de Game Over UI
 	    gameOverUI.SetActive(true);
@@ -65,5 +83,6 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
 	    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+	    // Coins remain intact because they are stored in PlayerPrefs
     }
 }

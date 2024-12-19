@@ -1,9 +1,11 @@
+using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Health : MonoBehaviour
+public class BaseHealth : MonoBehaviour
 {
-    public float maxHealth = 100f;
+    public float maxHealth = 500f;
     public float currentHealth;
     public Image healthbarFill;
     
@@ -37,7 +39,7 @@ public class Health : MonoBehaviour
 
     void Death()
     {
-      Destroy(gameObject,0.1f);  
+        Destroy(gameObject,0.1f);  
     }
     
 

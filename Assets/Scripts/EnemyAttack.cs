@@ -6,7 +6,7 @@ public class EnemyAttack : MonoBehaviour
     public float attackCooldown = 2f;      // Tijd tussen aanvallen
     private float lastAttackTime;          // Tijd sinds laatste aanval
 
-    private Health baseHealth;       // Referentie Health script base
+    private BaseHealth baseHealth;       // Referentie Health script base
     
     void Update()
     {
@@ -22,7 +22,7 @@ public class EnemyAttack : MonoBehaviour
         if (collision.gameObject.CompareTag("Base")) 
             // Zorg dat de base de tag "Base" heeft
         {
-            baseHealth = collision.gameObject.GetComponent<Health>();
+            baseHealth = collision.gameObject.GetComponent<BaseHealth>();
         }
     }
     

@@ -28,13 +28,6 @@ public class XRrigpositionongamestart : MonoBehaviour
                 isAtStartPosition = true;
                 Debug.Log("Moved to Start Position");
             }
-            // When gameActive is false, move to resetPosition (only once)
-            else if (!gameManager.gameActive && isAtStartPosition)
-            {
-                transform.position = resetPosition;
-                isAtStartPosition = false;
-                Debug.Log("Moved to Reset Position");
-            }
         }
     }
 }
